@@ -6,7 +6,10 @@ import (
 	"fiber-rest-api/repositories"
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/basicauth"
+	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"log"
 	"os"
 	"os/signal"
@@ -15,6 +18,22 @@ import (
 func main() {
 	app := fiber.New()
 	app.Use(cors.New())
+	app.Use(favicon.New())
+	app.Use(compress.New(compress.Config{
+		Level: compress.LevelBestSpeed, // https://github.com/valyala/fasthttp/blob/master/brotli.go
+	}))
+	app.Use(basicauth.New(basicauth.Config{
+		Users: map[string]string{
+			"": "123456",
+			//"admin": "123456",
+		},
+	}))
+
+	/*
+		cfg.Authorizer = func(user, pass string) bool {
+			userPwd, exist := cfg.Users[user]
+			return exist && subtle.ConstantTimeCompare(utils.UnsafeBytes(userPwd), utils.UnsafeBytes(pass)) == 1
+		}*/
 
 	repo := repositories.NewRepo()
 	personLogic := logic.NewService(repo)
