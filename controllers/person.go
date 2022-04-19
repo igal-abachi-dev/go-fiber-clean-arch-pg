@@ -1,18 +1,44 @@
 package controllers
 
 import (
-	"errors"
+	"fiber-rest-api/logic"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 )
 
-func BookController(app fiber.Router, service book.Service) {
-	app.Get("/person"/*,middleware.JWTProtected()*/, GetBooks(service))
-	app.Post("/person", AddBook(service))
-	app.Put("/person", UpdateBook(service))
-	app.Delete("/person", RemoveBook(service))
+func PersonController(app fiber.Router, logic logic.PersonLogic) {
+	app.Get("/" /*,middleware.JWTProtected()*/, GetPersons(logic))
+	app.Get("/:id" /*,middleware.JWTProtected()*/, GetPerson(logic))
+	//
+	//app.Post("/person", AddBook(service))
+	//app.Put("/person", UpdateBook(service))
+	//app.Delete("/person", RemoveBook(service))
 }
 
+// GetBooks is handler/controller which lists all Books from the BookShop
+func GetPersons(logic logic.PersonLogic) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		fetched, err := logic.GetAll()
+		if err != nil {
+			c.Status(http.StatusInternalServerError)
+			return c.JSON(nil)
+		}
+		return c.JSON(fetched)
+	}
+}
+func GetPerson(logic logic.PersonLogic) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		id := c.Params("id")
+		fetched, err := logic.GetItem(id)
+		if err != nil {
+			c.Status(http.StatusInternalServerError)
+			return c.JSON(nil)
+		}
+		return c.JSON(fetched)
+	}
+}
+
+/*
 // AddBook is handler/controller which creates Books in the BookShop
 func AddBook(service book.Service) fiber.Handler {
 	return func(c *fiber.Ctx) error {
@@ -76,18 +102,8 @@ func RemoveBook(service book.Service) fiber.Handler {
 		})
 	}
 }
-
-// GetBooks is handler/controller which lists all Books from the BookShop
-func GetBooks(service book.Service) fiber.Handler {
-	return func(c *fiber.Ctx) error {
-		fetched, err := service.FetchBooks()
-		if err != nil {
-			c.Status(http.StatusInternalServerError)
-			return c.JSON(presenter.BookErrorResponse(err))
-		}
-		return c.JSON(presenter.BooksSuccessResponse(fetched))
-	}
-}
+*/
+/*
 package utils
 
 import (
@@ -123,4 +139,6 @@ func ValidatorErrors(err error) map[string]string {
 	}
 
 	return fields
+
 }
+*/
