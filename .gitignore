@@ -18,3 +18,5 @@
 .env
 .docker_build/
 bin/
+/2backend
+/.idea
