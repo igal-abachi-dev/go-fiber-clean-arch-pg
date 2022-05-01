@@ -4,6 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"go-fiber-clean-arch-pg/logic"
 	"net/http"
+	"strconv"
 )
 
 //instead of jwt
@@ -51,6 +52,9 @@ func GetPersons(logic logic.PersonLogic) fiber.Handler {
 func GetPerson(logic logic.PersonLogic) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		id := c.Params("id")
+		if isInt(id) {
+			//param ok
+		}
 		fetched, err := logic.GetItem(id)
 		if err != nil {
 			c.Status(http.StatusInternalServerError)
@@ -58,6 +62,10 @@ func GetPerson(logic logic.PersonLogic) fiber.Handler {
 		}
 		return c.JSON(fetched)
 	}
+}
+func isInt(param string) bool {
+	_, err := strconv.ParseInt(param, 0, 64)
+	return err != nil
 }
 
 /*
