@@ -1,4 +1,4 @@
-module fiber-rest-api
+module go-fiber-clean-arch-pg
 
 go 1.18
 

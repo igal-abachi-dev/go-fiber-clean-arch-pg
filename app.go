@@ -1,19 +1,22 @@
 package main
 
 import (
-	"fiber-rest-api/controllers"
-	"fiber-rest-api/logic"
-	"fiber-rest-api/repositories"
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/basicauth"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
+	"go-fiber-clean-arch-pg/controllers"
+	"go-fiber-clean-arch-pg/logic"
+	"go-fiber-clean-arch-pg/repositories"
 	"log"
 	"os"
 	"os/signal"
+	//	_ "github.com/heroku/x/hmetrics/onload"
 )
+
+//file main.go
 
 func main() {
 	app := fiber.New()
@@ -62,11 +65,18 @@ func StartServer(a *fiber.App) {
 		close(idleConnsClosed)
 	}()
 
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		//log.Fatal("$PORT must be set")
+		port = "8080"
+	}
+
 	// Build Fiber connection URL.
 	fiberConnURL := fmt.Sprintf(
 		"%s:%s",
 		"0.0.0.0",
-		"8080",
+		port,
 		//os.Getenv("SERVER_HOST"),
 		//os.Getenv("SERVER_PORT"),
 	)

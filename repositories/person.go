@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"fiber-rest-api/entities"
+	"go-fiber-clean-arch-pg/entities"
 )
 
 //Repository interface allows us to access the CRUD Operations in mongo here.

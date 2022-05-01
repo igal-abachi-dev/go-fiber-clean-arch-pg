@@ -1,7 +1,7 @@
 package presenters
 
 import (
-	"fiber-rest-api/entities"
+	"go-fiber-clean-arch-pg/entities"
 	"time"
 )
 

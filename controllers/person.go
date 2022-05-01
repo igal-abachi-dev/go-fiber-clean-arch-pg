@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"fiber-rest-api/logic"
 	"github.com/gofiber/fiber/v2"
+	"go-fiber-clean-arch-pg/logic"
 	"net/http"
 )
 

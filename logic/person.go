@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"fiber-rest-api/dto/presenters"
-	"fiber-rest-api/repositories"
+	"go-fiber-clean-arch-pg/dto/presenters"
+	"go-fiber-clean-arch-pg/repositories"
 )
 
 //Service is an interface from which our api module can access our repository of all our models
