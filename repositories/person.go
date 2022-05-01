@@ -4,6 +4,18 @@ import (
 	"go-fiber-clean-arch-pg/entities"
 )
 
+//pgxpool: https://github.com/jackc/pgx
+//pgxscan: https://github.com/georgysavva/scany
+//https://play.sqlc.dev/
+//
+
+//Category:getAll()
+//Book:getbycategory[],getitem(id)
+//filecontent: getlinkbybook,getTextbyBook
+
+//or
+//getall,getitem,getbyparent
+
 //Repository interface allows us to access the CRUD Operations in mongo here.
 type Repository interface {
 	GetAll() (*[]entities.Person, error)

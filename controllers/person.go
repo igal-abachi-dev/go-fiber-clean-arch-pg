@@ -18,6 +18,25 @@ func PersonController(app fiber.Router, logic logic.PersonLogic) {
 	//app.Delete("/person", RemoveBook(service))
 }
 
+//https://curatedgo.com/r/gojay-is-a-francoispqtgojay/index.html
+/*
+gojay.MarshalJSONObject()
+
+func (m *DSTopic) MarshalJSONObject(enc *gojay.Encoder) {
+	enc.AddIntKey("id", m.Id)
+	enc.AddStringKey("slug", m.Slug)
+}
+
+func (m *DSTopics) MarshalJSONArray(enc *gojay.Encoder) {
+	for _, e := range *m {
+		enc.AddObject(e)
+	}
+}
+func (m *DSTopics) IsNil() bool {
+	return m == nil
+}
+*/
+
 // GetBooks is handler/controller which lists all Books from the BookShop
 func GetPersons(logic logic.PersonLogic) fiber.Handler {
 	return func(c *fiber.Ctx) error {
