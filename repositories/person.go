@@ -30,6 +30,7 @@ WHERE "book_id" = $1 LIMIT 1;
 SELECT content FROM public."FileContent"
 WHERE "book_id" = $1 LIMIT 1;
 */
+//search text in all books?
 
 //or
 //getall,getitem,getbyparent
