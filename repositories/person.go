@@ -13,6 +13,24 @@ import (
 //Book:getbycategory[],getitem(id)
 //filecontent: getlinkbybook,getTextbyBook
 
+/*
+SELECT Name, Level, id FROM public."Category"
+ORDER BY id ASC
+
+SELECT Name, Author, Id, Category FROM public."Book"
+WHERE "Category" = $1
+ORDER BY "Id" ASC
+
+SELECT Name, Author, Id, Category FROM public."Book"
+WHERE "Id" = $1 LIMIT 1
+
+SELECT url, password FROM public."FileContent"
+WHERE "book_id" = $1 LIMIT 1;
+
+SELECT content FROM public."FileContent"
+WHERE "book_id" = $1 LIMIT 1;
+*/
+
 //or
 //getall,getitem,getbyparent
 
