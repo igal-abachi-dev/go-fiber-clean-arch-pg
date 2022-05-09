@@ -9,3 +9,7 @@ type Person struct {
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }
+
+//`db:"user_id"`
+
+
