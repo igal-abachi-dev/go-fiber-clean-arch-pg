@@ -7,12 +7,24 @@ import (
 	"go-fiber-clean-arch-pg/entities"
 )
 
+type CategoryQueries struct {
+}
+
+func NewCategoryRepository() CategoryRepository {
+	var repo = &CategoryQueries{}
+	return repo
+}
+
+type CategoryRepository interface {
+	GetAllCategories() ([]*entities.Category, error)
+}
+
 const getAllCategories = `-- name: GetAllCategories :many
 SELECT Name, Level, id FROM public."Category"
 ORDER BY id ASC
 `
 
-func (q *Queries) GetAllCategories() ([]*entities.Category, error) {
+func (q *CategoryQueries) GetAllCategories() ([]*entities.Category, error) {
 	ctx := context.Background()
 	db, _ := pgxpool.Connect(ctx, PgConnection)
 

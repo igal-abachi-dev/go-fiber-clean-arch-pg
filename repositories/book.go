@@ -7,12 +7,25 @@ import (
 	"go-fiber-clean-arch-pg/entities"
 )
 
+type BookQueries struct {
+}
+
+func NewBookRepository() BookRepository {
+	var repo = &BookQueries{}
+	return repo
+}
+
+type BookRepository interface {
+	GetBookById(id int32) (entities.Book, error)
+	GetBooksByCategory(category int32) ([]entities.Book, error)
+}
+
 const getBookById = `-- name: GetBookById :one
 SELECT Name, Author, Id, Category FROM public."Book"
 WHERE "Id" = $1 LIMIT 1
 `
 
-func (q *Queries) GetBookById(id int32) (entities.Book, error) {
+func (q *BookQueries) GetBookById(id int32) (entities.Book, error) {
 	ctx := context.Background()
 	db, _ := pgxpool.Connect(ctx, PgConnection)
 
@@ -28,7 +41,7 @@ WHERE "Category" = $1
 ORDER BY "Id" ASC
 `
 
-func (q *Queries) GetBooksByCategory(category int32) ([]entities.Book, error) {
+func (q *BookQueries) GetBooksByCategory(category int32) ([]entities.Book, error) {
 
 	ctx := context.Background()
 	db, _ := pgxpool.Connect(ctx, PgConnection)

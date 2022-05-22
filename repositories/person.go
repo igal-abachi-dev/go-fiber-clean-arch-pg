@@ -48,11 +48,9 @@ type repository struct {
 }
 
 //NewRepo is the single instance repo that is being created.
-func NewRepo() Repository {
+func NewPersonRepo() Repository {
 	celebs := map[string]*entities.Person{
-		"Nicolas Cage":       {ID: "1", FirstName: "Nicolas", LastName: "Cage"},
-		"Selena Gomez":       {ID: "2", FirstName: "Selena", LastName: "Gomez"},
-		"Scarlett Johansson": {ID: "3", FirstName: "Scarlett", LastName: "Johansson"},
+		"": {ID: "1", FirstName: "", LastName: ""},
 	}
 	var repo = &repository{celebs}
 	return repo

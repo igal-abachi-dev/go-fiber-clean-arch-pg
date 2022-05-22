@@ -19,7 +19,7 @@ type logic struct {
 }
 
 //NewService is used to create a single instance of the service
-func NewService(r repositories.Repository) PersonLogic {
+func NewPersonLogic(r repositories.Repository) PersonLogic {
 	return &logic{
 		repository: r,
 	}

@@ -10,7 +10,7 @@ import (
 //instead of jwt
 //https://docs.gofiber.io/api/middleware/basicauth
 
-func PersonController(app fiber.Router, logic logic.PersonLogic) {
+func BookController(app fiber.Router, logic logic.PersonLogic) {
 	app.Get("/" /*,middleware.JWTProtected()*/, GetPersons(logic))
 	app.Get("/:id" /*,middleware.JWTProtected()*/, GetPerson(logic))
 	//

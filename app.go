@@ -38,11 +38,23 @@ func main() {
 			return exist && subtle.ConstantTimeCompare(utils.UnsafeBytes(userPwd), utils.UnsafeBytes(pass)) == 1
 		}*/
 
-	repo := repositories.NewRepo()
-	personLogic := logic.NewService(repo)
+	//repo := repositories.NewPersonRepo()
+	//personLogic := logic.NewPersonLogic(repo)
+
+	bookRepo := repositories.NewBookRepository()
+	bookLogic := logic.NewBookLogic(bookRepo)
+
+	categoryRepo := repositories.NewCategoryRepository()
+	categoryLogic := logic.NewCategoryLogic(categoryRepo)
+
+	fileContentRepo := repositories.NewFileContentRepository()
+	fileContentLogic := logic.NewCategoryLogic(fileContentRepo)
 
 	api := app.Group("/api")
-	controllers.PersonController(api.Group("/person"), personLogic)
+	controllers.BookController(api.Group("/book"), bookLogic)
+	controllers.CategoryController(api.Group("/category"), categoryLogic)
+	controllers.FileContentController(api.Group("/fileContent"), fileContentLogic)
+
 	StartServer(app)
 }
 
