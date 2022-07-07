@@ -5,7 +5,6 @@ import (
 	"go-fiber-clean-arch-pg/repositories"
 )
 
-//Service is an interface from which our api module can access our repository of all our models
 type PersonLogic interface {
 	GetAll() (*[]presenters.Person, error)
 	GetItem(ID string) (*presenters.Person, error)
@@ -18,11 +17,27 @@ type logic struct {
 	repository repositories.Repository
 }
 
-//NewService is used to create a single instance of the service
 func NewPersonLogic(r repositories.Repository) PersonLogic {
 	return &logic{
 		repository: r,
 	}
+}
+
+func (s *logic) GetAll() (*[]presenters.Person, error) { //flat items
+	itemsRef, _ := s.repository.GetAll()
+	items := *itemsRef
+	persons := []presenters.Person{}
+	for i := 0; i < len(items); i++ {
+		item := items[i]
+		persons = append(persons, presenters.PersonFromEntity(item))
+	}
+	return &persons, nil
+}
+
+func (s *logic) GetItem(ID string) (*presenters.Person, error) { //full item
+	item, _ := s.repository.GetItem(ID)
+	person := presenters.PersonFromEntity(*item)
+	return &person, nil
 }
 
 //https://github.com/go-playground/validator
@@ -44,24 +59,7 @@ func NewPersonLogic(r repositories.Repository) PersonLogic {
 
 // https://github.com/jessevdk/go-flags
 
-func (s *logic) GetAll() (*[]presenters.Person, error) { //flat items
-	itemsRef, _ := s.repository.GetAll()
-	items := *itemsRef
-	persons := []presenters.Person{}
-	for i := 0; i < len(items); i++ {
-		item := items[i]
-		persons = append(persons, presenters.PersonFromEntity(item))
-	}
-	return &persons, nil
-}
-
 //https://winterflower.github.io/2017/08/20/the-asterisk-and-the-ampersand/
-
-func (s *logic) GetItem(ID string) (*presenters.Person, error) { //full item
-	item, _ := s.repository.GetItem(ID)
-	person := presenters.PersonFromEntity(*item)
-	return &person, nil
-}
 
 //
 ////InsertBook is a service layer that helps insert book in BookShop

@@ -48,7 +48,7 @@ func main() {
 	categoryLogic := logic.NewCategoryLogic(categoryRepo)
 
 	fileContentRepo := repositories.NewFileContentRepository()
-	fileContentLogic := logic.NewCategoryLogic(fileContentRepo)
+	fileContentLogic := logic.NewFileContentLogic(fileContentRepo)
 
 	api := app.Group("/api")
 	controllers.BookController(api.Group("/book"), bookLogic)
