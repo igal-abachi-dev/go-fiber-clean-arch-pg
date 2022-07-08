@@ -1,9 +1,9 @@
 package entities
 
 type Category struct {
-	Name  string `json:"name"`
-	Level *int32 `json:"level"`
-	ID    int32  `json:"id"`
+	Name  string `json:"name" db:"Name"`
+	Level *int32 `json:"level" db:"Level"`
+	//	id    *int32 `json:"id"  db:"id"`
 }
 
 //type NullInt32 struct {

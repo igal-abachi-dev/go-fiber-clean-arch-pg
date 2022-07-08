@@ -6,12 +6,12 @@ package entities
 //}
 
 type GetBookTextContentRow struct {
-	Content *string `json:"content"`
+	Content *string `json:"content" db:"content"`
 }
 
 type GetBookUrlRow struct {
-	Url      string  `json:"url"`
-	Password *string `json:"password"`
+	Url      string  `json:"url" db:"url"`
+	Password *string `json:"password" db:"password"`
 }
 
 //

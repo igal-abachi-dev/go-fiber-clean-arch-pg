@@ -21,7 +21,7 @@ type FileContentRepository interface {
 }
 
 const getBookTextContent = `-- name: GetBookTextContent :one
-SELECT content FROM public."FileContent"
+SELECT "content" FROM public."FileContent"
 WHERE "book_id" = $1 LIMIT 1
 `
 
@@ -36,7 +36,7 @@ func (q *FileContentQueries) GetBookTextContent(bookID int32) (entities.GetBookT
 }
 
 const getBookUrl = `-- name: GetBookUrl :one
-SELECT url, password FROM public."FileContent"
+SELECT "url", "password" FROM public."FileContent"
 WHERE "book_id" = $1 LIMIT 1
 `
 

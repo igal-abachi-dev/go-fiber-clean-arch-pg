@@ -21,10 +21,5 @@ func NewCategoryLogic(r repositories.CategoryRepository) CategoryLogic {
 func (l *categoryLogic) GetAllCategories() ([]entities.Category, error) {
 	items, _ := l.repository.GetAllCategories()
 
-	categories := []entities.Category{}
-	for i := 0; i < len(items); i++ {
-		item := *items[i]
-		categories = append(categories, item)
-	}
-	return categories, nil
+	return items, nil
 }

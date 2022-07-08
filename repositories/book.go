@@ -21,7 +21,7 @@ type BookRepository interface {
 }
 
 const getBookById = `-- name: GetBookById :one
-SELECT Name, Author, Id, Category FROM public."Book"
+SELECT "Name", "Author", "Id", "Category", "commentary" FROM public."Book"
 WHERE "Id" = $1 LIMIT 1
 `
 
@@ -36,7 +36,7 @@ func (q *BookQueries) GetBookById(id int32) (entities.Book, error) {
 }
 
 const getBooksByCategory = `-- name: GetBooksByCategory :many
-SELECT Name, Author, Id, Category FROM public."Book"
+SELECT "Name", "Author", "Id", "Category", "commentary" FROM public."Book"
 WHERE "Category" = $1
 ORDER BY "Id" ASC
 `
